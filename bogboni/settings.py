@@ -25,7 +25,10 @@ SECRET_KEY = '67yf!#wy2rj-7l_cijpkbhm+mfay)+^@_1azauwm9gtk(xmlux'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'http://localhost:8000/',
+    'vast-scrubland-19162.herokuapp.com',
+]
 
 
 # Application definition
