@@ -1,1 +1,1 @@
-web: gunicorn sixerr.wsgi --log-file -
+web: gunicorn bogboni.wsgi --log-file -
