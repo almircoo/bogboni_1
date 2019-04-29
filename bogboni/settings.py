@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'http://localhost:8000/',
-    'https://vast-scrubland-19162.herokuapp.com',
+    'vast-scrubland-19162.herokuapp.com',
 ]
 
 
