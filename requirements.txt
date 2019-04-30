@@ -18,3 +18,4 @@ urllib3==1.24.2
 whitenoise==4.1.2
 dj-database-url==0.5.0
 psycopg2==2.8.2
+braintree==3.53.0

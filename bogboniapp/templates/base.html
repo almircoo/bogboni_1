@@ -19,14 +19,14 @@
       <div class="navbar-inverse">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="/"><img src="{% static 'img/logo.png' %}" height="23"></a>
+            <a class="navbar-brand" href="/"><img src="{% static 'img/logo.png' %}" height="33"></a>
           </div>
           <form class="navbar-form navbar-left" role="search" method="GET" action="/search/">
             <div class="form-group">
               <div class="input-group">
                 <input type="text" name="title" class="form-control" placeholder="Find services">
                 <span class="input-group-btn">
-                  <button class="btn btn-sucess">Find</button>
+                  <button class="btn btn-sucess btn-block">Find</button>
                 </span>
               </div>
             </div>
@@ -40,6 +40,14 @@
                   {{ user.get_full_name|default:user.username }} <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
+                  <li><a href="{% url 'create_gig' %}">Create a gig</a></li>
+                  <li><a href="{% url 'my_gigs' %}">My Gigs</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="{% url 'my_sellings' %}">My Sellings</a></li>
+                  <li><a href="{% url 'my_buyings' %}">My Buyings</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="{% url 'profile' user.username %}">My Profile</a></li>
+                  <li role="separator" class="divider"></li>
                   <li><a href="{% url 'auth:logout' %}?next={{request.path}}">Logout</a></li>
                 </ul>
               </li>
@@ -54,11 +62,11 @@
       <div id="category">
         <div class="container">
           <ul class="nav navbar-nav">
-            <li><a href="#">Graphics & Design</a></li>
-            <li><a href="#">Digital Marketing</a></li>
-            <li><a href="#">Video & Animation</a></li>
-            <li><a href="#">Music & Audio</a></li>
-            <li><a href="#">Programming & Tech</a></li>
+            <li><a href="/category/graphics-design">Graphics & Design</a></li>
+            <li><a href="/category/digital-marketing">Digital Marketing</a></li>
+            <li><a href="/category/video-animation">Video & Animation</a></li>
+            <li><a href="/category/music-audio">Music & Audio</a></li>
+            <li><a href="/category/programming-tech">Programming & Tech</a></li>
           </ul>
         </div>
       </div>

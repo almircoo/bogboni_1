@@ -26,7 +26,7 @@ SECRET_KEY = '67yf!#wy2rj-7l_cijpkbhm+mfay)+^@_1azauwm9gtk(xmlux'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'http://localhost:8000/',
+    'localhost',
     'vast-scrubland-19162.herokuapp.com',
 ]
 
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     #local
     'bogboniapp',
     'social_django',
-    'social.apps.django_app.default',
 ]
 
 MIDDLEWARE = [
@@ -63,7 +62,9 @@ ROOT_URLCONF = 'bogboni.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,8 +73,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 #local
-                'social.apps.django_app.context_processors.backends',
-                'social.apps.django_app.context_processors.login_redirect',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
+                #'django.core.context_processors.media',
             ],
         },
     },
@@ -134,10 +136,10 @@ STATIC_URL = '/static/'
 # To serve static files on Heroku
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-AUTHENTICATION_BACKENDS = [
-     'social.backends.facebook.FacebookOAuth2',
-     'django.contrib.auth.backends.ModelBackend',
-]
+AUTHENTICATION_BACKENDS = (
+   'social_core.backends.facebook.FacebookOAuth2', #facebook authenticate
+   'django.contrib.auth.backends.ModelBackend',
+)
 
 LOGIN_REDIRECT_URL = '/'
 
@@ -146,7 +148,26 @@ SOCIAL_AUTH_FACEBOOK_KEY = '2252108195105354'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'e811b511f050439a87468ace2ae8b312'
 
 
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'bogboniapp.social_auth_pipeline.save_avatar',  # <--- set the path to the function
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
+
 # Replace database setting to use postgresql on Heroku
 import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
+
+# Setup upload directory for Gig model
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
