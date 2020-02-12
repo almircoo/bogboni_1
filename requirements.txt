@@ -1,7 +1,7 @@
 certifi==2019.3.9
 chardet==3.0.4
 defusedxml==0.6.0
-Django==1.11.17
+Django==1.11.28
 gunicorn==19.9.0
 idna==2.8
 oauthlib==3.0.1
